@@ -60,27 +60,38 @@ let filme10 = {
     avaliacao: 8
 }
 
-const arquivoCinematografico = {
+const arquivoCinematografico = [
     filme1, filme2, filme3, filme4, filme5,
     filme6, filme7, filme8, filme9, filme10
+];
 }
 
 // Transformar catálogo em array para facilitar operações
 const listaFilmes = Object.values(arquivoCinematografico)
 
 // Criar array de notas
-const conjuntoNotas = listaFilmes.map(filme => filme.avaliacao)
+let conjuntoNotas = [];
+for (let i = 0; i < arquivoCinematografico.length; i++) {
+    conjuntoNotas[i] = arquivoCinematografico[i].avaliacao;
+}
 
 // Identificar maior nota
-let notaMaxima = conjuntoNotas[0]
+let notaMaxima = conjuntoNotas[0];
+
 for (let i = 1; i < conjuntoNotas.length; i++) {
     if (conjuntoNotas[i] > notaMaxima) {
-        notaMaxima = conjuntoNotas[i]
+        notaMaxima = conjuntoNotas[i];
     }
 }
 
-let indiceMelhor = conjuntoNotas.indexOf(notaMaxima) + 1
+let indiceMelhor = -1;
 
+for (let i = 0; i < conjuntoNotas.length; i++) {
+    if (conjuntoNotas[i] === notaMaxima) {
+        indiceMelhor = i + 1;
+        break; 
+    }
+}
 // Média geral
 let somaValores = conjuntoNotas.reduce((acc, atual) => acc + atual, 0)
 let mediaFinal = somaValores / conjuntoNotas.length
