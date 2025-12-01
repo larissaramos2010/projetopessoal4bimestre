@@ -67,7 +67,7 @@ const arquivoCinematografico = [
 }
 
 // Transformar catálogo em array para facilitar operações
-const listaFilmes = Object.values(arquivoCinematografico)
+const listaFilmes = arquivoCinematografico
 
 // Criar array de notas
 let conjuntoNotas = [];
