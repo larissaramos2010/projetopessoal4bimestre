@@ -115,43 +115,38 @@ listaFilmes.forEach(filme => {
 })
 
 // Filmes nota 9 ou 10
-let filmesTop = listaFilmes.filter(filme => filme.avaliacao >= 9)
+const filmesTop = filmesTop.map(f => f.titulo); // Assumindo que filmesTop foi criado anteriormente
+let filmesTopString = "";
+for (const filme of filmesTop) {
+    if (filmesTopString.length > 0) {
+        filmesTopString += ", ";
+    }
+    filmesTopString += filme.titulo;
+}
+// ${filmesTopString}
 
-// Ordenação por avaliação
-let ordenadoPorNota = [...listaFilmes].sort((a, b) => b.avaliacao - a.avaliacao)
+// Ordenado por avaliação:
+let ordenadoPorNotaString = "";
+for (const filme of ordenadoPorNota) {
+    if (ordenadoPorNotaString.length > 0) {
+        ordenadoPorNotaString += ", ";
+    }
+    ordenadoPorNotaString += `(${filme.titulo} + ${filme.avaliacao})`;
+}
+// ${ordenadoPorNotaString}
 
-// Ordenação por ano
-let ordenadoPorAno = [...listaFilmes].sort((a, b) => a.ano - b.ano)
+// Ordenado por ano:
+let ordenadoPorAnoString = "";
+for (const filme of ordenadoPorAno) {
+    if (ordenadoPorAnoString.length > 0) {
+        ordenadoPorAnoString += ", ";
+    }
+    ordenadoPorAnoString += `(${filme.titulo} + ${filme.ano})`;
+}
+// ${ordenadoPorAnoString}
 
-console.log(`
-    === Catálogo de Filmes ===
-`)
 
-// Exibir catálogo automaticamente
-listaFilmes.forEach((f, i) => {
-    console.log(`${i + 1}. ${f.titulo} - ${f.genero} (${f.ano}) | Nota: ${f.avaliacao}`)
-})
 
-console.log(`
-    Filme mais bem avaliado: ${arquivoCinematografico["filme" + indiceMelhor].titulo} (${notaMaxima})
-
-    Média geral das avaliações: ${mediaFinal.toFixed(2)}
-
-    Filme mais antigo: ${filmeMaisAntigo.titulo} (${filmeMaisAntigo.ano})
-    Filme mais recente: ${filmeMaisRecente.titulo} (${filmeMaisRecente.ano})
-
-    Quantidade de filmes por gênero:
-    ${JSON.stringify(generos, null, 4)}
-
-    Filmes com nota 9 ou maior:
-    ${filmesTop.map(f => f.titulo).join(", ")}
-
-    Ordenado por avaliação:
-    ${ordenadoPorNota.map(f => f.titulo + " (" + f.avaliacao + ")").join(", ")}
-
-    Ordenado por ano:
-    ${ordenadoPorAno.map(f => f.titulo + " (" + f.ano + ")").join(", ")}
-`)
 
 // === NÃO MODIFIQUE OU ADICIONE NADA ABAIXO ============
 module.exports = { filme1, filme2, filme3, filme4, filme5, filme6, filme7, filme8, filme9, filme10 }
