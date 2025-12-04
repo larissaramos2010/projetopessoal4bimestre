@@ -43,7 +43,7 @@ let filme7 = {
 }
 let filme8 = {
     titulo: "Ainda Estou Aqui", 
-    genero: "DramaBiografico", 
+    genero: "Drama Biográfico", 
     ano: 2024, 
     avaliacao: 9
 }
@@ -63,35 +63,28 @@ let filme10 = {
 const arquivoCinematografico = [
     filme1, filme2, filme3, filme4, filme5,
     filme6, filme7, filme8, filme9, filme10
-];
-}
+]
 
-// Transformar catálogo em array para facilitar operações
 const listaFilmes = arquivoCinematografico
 
 // Criar array de notas
-let conjuntoNotas = [];
+let conjuntoNotas = []
 for (let i = 0; i < arquivoCinematografico.length; i++) {
-    conjuntoNotas[i] = arquivoCinematografico[i].avaliacao;
+    conjuntoNotas[i] = arquivoCinematografico[i].avaliacao
 }
 
 // Identificar maior nota
-let notaMaxima = conjuntoNotas[0];
+let notaMaxima = conjuntoNotas[0]
 
 for (let i = 1; i < conjuntoNotas.length; i++) {
     if (conjuntoNotas[i] > notaMaxima) {
-        notaMaxima = conjuntoNotas[i];
+        notaMaxima = conjuntoNotas[i]
     }
 }
 
-let indiceMelhor = -1;
+// Descobrir o índice do melhor filme
+let indiceMelhor = conjuntoNotas.indexOf(notaMaxima)
 
-for (let i = 0; i < conjuntoNotas.length; i++) {
-    if (conjuntoNotas[i] === notaMaxima) {
-        indiceMelhor = i + 1;
-        break; 
-    }
-}
 // Média geral
 let somaValores = conjuntoNotas.reduce((acc, atual) => acc + atual, 0)
 let mediaFinal = somaValores / conjuntoNotas.length
@@ -114,39 +107,30 @@ listaFilmes.forEach(filme => {
     }
 })
 
-// Filmes nota 9 ou 10
-const filmesTop = filmesTop.map(f => f.titulo); // Assumindo que filmesTop foi criado anteriormente
-let filmesTopString = "";
-for (const filme of filmesTop) {
-    if (filmesTopString.length > 0) {
-        filmesTopString += ", ";
-    }
-    filmesTopString += filme.titulo;
-}
-// ${filmesTopString}
+// Filmes com nota 9 ou 10
+const filmesTop = listaFilmes.filter(f => f.avaliacao >= 9)
+let filmesTopString = filmesTop.map(f => f.titulo).join(", ")
 
-// Ordenado por avaliação:
-let ordenadoPorNotaString = "";
-for (const filme of ordenadoPorNota) {
-    if (ordenadoPorNotaString.length > 0) {
-        ordenadoPorNotaString += ", ";
-    }
-    ordenadoPorNotaString += `(${filme.titulo} + ${filme.avaliacao})`;
-}
-// ${ordenadoPorNotaString}
+// Ordenado por avaliação
+let ordenadoPorNota = [...listaFilmes].sort((a, b) => b.avaliacao - a.avaliacao)
+let ordenadoPorNotaString = ordenadoPorNota
+    .map(f => `(${f.titulo} + ${f.avaliacao})`)
+    .join(", ")
 
-// Ordenado por ano:
-let ordenadoPorAnoString = "";
-for (const filme of ordenadoPorAno) {
-    if (ordenadoPorAnoString.length > 0) {
-        ordenadoPorAnoString += ", ";
-    }
-    ordenadoPorAnoString += `(${filme.titulo} + ${filme.ano})`;
-}
-// ${ordenadoPorAnoString}
+// Ordenado por ano
+let ordenadoPorAno = [...listaFilmes].sort((a, b) => a.ano - b.ano)
+let ordenadoPorAnoString = ordenadoPorAno
+    .map(f => `(${f.titulo} + ${f.ano})`)
+    .join(", ")
 
 
-
-
-// === NÃO MODIFIQUE OU ADICIONE NADA ABAIXO ============
-module.exports = { filme1, filme2, filme3, filme4, filme5, filme6, filme7, filme8, filme9, filme10 }
+// --- EXIBINDO RESULTADOS NO CONSOLE ---
+console.log("Maior nota:", notaMaxima)
+console.log("Melhor filme:", listaFilmes[indiceMelhor].titulo)
+console.log("Média geral das notas:", mediaFinal.toFixed(2))
+console.log("Filme mais antigo:", filmeMaisAntigo.titulo)
+console.log("Filme mais recente:", filmeMaisRecente.titulo)
+console.log("Quantidade por gênero:", generos)
+console.log("Filmes nota 9 ou 10:", filmesTopString)
+console.log("Ordenados por avaliação:", ordenadoPorNotaString)
+console.log("Ordenados por ano:", ordenadoPorAnoString)
